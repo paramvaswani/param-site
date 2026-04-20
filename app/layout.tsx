@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { LensProvider } from "./_components/LensContext";
+import { FeedStrip } from "./_components/FeedStrip";
+import { LensPill } from "./_components/LensPill";
 
 const serif = Instrument_Serif({
   weight: "400",
@@ -42,7 +45,11 @@ export default function RootLayout({
       className={`${serif.variable} ${mono.variable} antialiased`}
     >
       <body className="min-h-screen bg-bg text-ink selection:bg-accent/20">
-        {children}
+        <LensProvider>
+          <FeedStrip />
+          {children}
+          <LensPill />
+        </LensProvider>
       </body>
     </html>
   );

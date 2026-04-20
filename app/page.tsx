@@ -1,5 +1,6 @@
+"use client";
+
 import {
-  flagship,
   products,
   research,
   infrastructure,
@@ -7,13 +8,29 @@ import {
   stats,
   type Project,
 } from "@/lib/projects";
+import { useLens } from "./_components/LensContext";
+import { ReadFirst } from "./_components/ReadFirst";
+import { reorder } from "@/lib/lenses";
 
 export default function Home() {
+  const { active, hasChosen } = useLens();
+
+  const orderedProducts = hasChosen
+    ? reorder(products, active.order.products)
+    : products;
+  const orderedResearch = hasChosen
+    ? reorder(research, active.order.research)
+    : research;
+  const orderedInfra = hasChosen
+    ? reorder(infrastructure, active.order.infrastructure)
+    : infrastructure;
+
   return (
     <main className="font-sans text-ink">
       <TopBar />
-      <Hero />
+      <Hero lede={active.heroLede} />
       <StatsStrip />
+      <ReadFirst />
       <Flagship />
       <Section
         id="products"
@@ -21,7 +38,7 @@ export default function Home() {
         title="What I ship"
         lede="Live and in use. Some pay rent, most feed the loop."
       >
-        <Grid items={products} />
+        <Grid items={orderedProducts} />
       </Section>
       <Section
         id="research"
@@ -29,7 +46,7 @@ export default function Home() {
         title="What I measure"
         lede="Benchmarks I couldn't find, so I built them."
       >
-        <Grid items={research} />
+        <Grid items={orderedResearch} />
       </Section>
       <Section
         id="infrastructure"
@@ -37,7 +54,7 @@ export default function Home() {
         title="How I ship fast"
         lede="MCPs, hooks, agents. The machinery behind 122 commits a week."
       >
-        <Grid items={infrastructure} />
+        <Grid items={orderedInfra} />
       </Section>
       <Section
         id="writing"
@@ -88,7 +105,7 @@ function TopBar() {
   );
 }
 
-function Hero() {
+function Hero({ lede }: { lede: string }) {
   return (
     <section id="top" className="border-b border-rule">
       <div className="mx-auto max-w-6xl px-6 pb-20 pt-24 md:pb-32 md:pt-36">
@@ -106,12 +123,11 @@ function Hero() {
             settled by your own body.
           </span>
         </h1>
-        <p className="rise delay-2 mt-10 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
-          Solo founder in Bangalore. Flagship is{" "}
-          <Link href="#flagship">Keep</Link> — charity-forfeit commitment
-          markets where Whoop and Oura decide whether you won. Around it: an
-          oracle protocol, eleven side projects, four MCP servers, and a private
-          agent army that runs my life so I can stay in the build.
+        <p
+          key={lede}
+          className="rise delay-2 mt-10 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl"
+        >
+          {lede}
         </p>
         <div className="rise delay-3 mt-12 flex flex-wrap gap-3 font-mono text-[13px]">
           <CTA href="#flagship" primary>
@@ -171,7 +187,7 @@ function Flagship() {
             the market — no self-reporting.
           </p>
           <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-            This is Beeminder's idea with real markets, real stakes, and a
+            This is Beeminder&rsquo;s idea with real markets, real stakes, and a
             cryptographic oracle underneath (
             <Link href="#infrastructure">BONP</Link>). Pre-seed, play money
             first, Gibraltar-licensed real money in 6–18 months.
@@ -388,11 +404,29 @@ function ContactLine({
 }
 
 function Footer() {
+  const { hasChosen, primary, fork, reset } = useLens();
   return (
     <footer className="bg-bg-alt">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 font-mono text-[11px] uppercase tracking-widest text-ink-mute">
         <span>© 2026 Param Vaswani · Bangalore</span>
-        <span>made in 90 minutes with Claude Code</span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          {hasChosen && (
+            <>
+              <span>
+                tour: {primary.label}
+                {fork ? ` / ${fork.label}` : ""}
+              </span>
+              <button
+                type="button"
+                onClick={reset}
+                className="underline-offset-4 hover:text-ink hover:underline"
+              >
+                reset tour
+              </button>
+            </>
+          )}
+          <span>made in 90 minutes with Claude Code</span>
+        </div>
       </div>
     </footer>
   );
