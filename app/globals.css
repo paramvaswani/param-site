@@ -1,26 +1,141 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&f[]=cabinet-grotesk@400,500,700,800&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  color-scheme: light;
+  --bg: 247 246 243; /* #F7F6F3 warm paper */
+  --bg-alt: 242 240 234; /* #F2F0EA */
+  --ink: 17 17 17; /* #111111 off-black */
+  --ink-soft: 60 60 60;
+  --ink-mute: 110 110 110;
+  --rule: 224 220 212; /* warm border */
+  --accent: 183 72 42; /* terracotta */
+  --accent-soft: 212 107 78;
+  --live: 52 120 74; /* muted forest */
+  --wip: 160 110 40; /* muted amber */
+  --research: 70 90 130; /* dusk blue */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+    --bg: 17 17 17;
+    --bg-alt: 26 26 26;
+    --ink: 235 233 227;
+    --ink-soft: 195 192 183;
+    --ink-mute: 135 132 124;
+    --rule: 48 46 42;
+    --accent: 220 130 95;
+    --accent-soft: 225 140 105;
+    --live: 120 175 140;
+    --wip: 210 160 90;
+    --research: 140 160 195;
   }
 }
 
+@theme inline {
+  --color-bg: rgb(var(--bg));
+  --color-bg-alt: rgb(var(--bg-alt));
+  --color-ink: rgb(var(--ink));
+  --color-ink-soft: rgb(var(--ink-soft));
+  --color-ink-mute: rgb(var(--ink-mute));
+  --color-rule: rgb(var(--rule));
+  --color-accent: rgb(var(--accent));
+  --color-accent-soft: rgb(var(--accent-soft));
+  --color-live: rgb(var(--live));
+  --color-wip: rgb(var(--wip));
+  --color-research: rgb(var(--research));
+  --font-sans: "Satoshi", ui-sans-serif, system-ui;
+  --font-display: "Cabinet Grotesk", "Satoshi", ui-sans-serif, system-ui;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--bg));
+  color: rgb(var(--ink));
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "ss02", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.2);
+  color: rgb(var(--ink));
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.rule {
+  border-color: rgb(var(--rule));
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.delay-1 {
+  animation-delay: 60ms;
+}
+.delay-2 {
+  animation-delay: 120ms;
+}
+.delay-3 {
+  animation-delay: 180ms;
+}
+.delay-4 {
+  animation-delay: 240ms;
+}
+.delay-5 {
+  animation-delay: 300ms;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+a {
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+.grid-rule > * + * {
+  border-top: 1px solid rgb(var(--rule));
+}
+@media (min-width: 768px) {
+  .grid-rule-md > * {
+    border-right: 1px solid rgb(var(--rule));
+  }
+  .grid-rule-md > *:nth-child(2n) {
+    border-right: 0;
+  }
 }
