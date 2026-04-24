@@ -8,18 +8,37 @@ import {
   skills,
   writing,
   stats,
+  manifesto,
+  origin,
+  process,
+  currently,
+  pulls,
+  buildLog,
+  liveCard,
+  library,
+  conversations,
+  asks,
+  faqs,
+  cadence,
   type Project,
 } from "@/lib/projects";
 import { Reveal } from "./_components/Reveal";
 import { Magnetic } from "./_components/Magnetic";
+import { ScrollProgress } from "./_components/ScrollProgress";
+import { SectionIndex } from "./_components/SectionIndex";
+import { CountUp } from "./_components/CountUp";
 
 export default function Home() {
   return (
     <main className="font-sans text-ink">
+      <ScrollProgress />
+      <SectionIndex />
       <TopBar />
       <Marquee />
       <Hero />
       <Manifesto />
+      <Pull index={0} />
+      <Origin />
       <StatsStrip />
       <StudioFlagship />
       <StudioGrid
@@ -29,6 +48,7 @@ export default function Home() {
         lede="Live and in use. Some pay rent, most feed the loop."
         items={products}
       />
+      <Pull index={1} />
       <StudioGrid
         id="research"
         eyebrow="02 — research"
@@ -43,9 +63,19 @@ export default function Home() {
         lede="MCPs, hooks, agents. The scaffolding behind 122 commits a week."
         items={infrastructure}
       />
+      <Process />
+      <Pull index={2} />
+      <Live />
+      <Currently />
+      <BuildLog />
+      <Cadence />
       <Beliefs />
+      <Library />
+      <InConversation />
       <Causes />
       <Skills />
+      <FAQ />
+      <Asks />
       <Connect />
       <Footer />
     </main>
@@ -61,15 +91,24 @@ function TopBar() {
           <span className="text-accent">.</span>
           <span className="text-ink-soft">ventures</span>
         </a>
-        <nav className="hidden gap-8 font-mono uppercase tracking-[0.18em] text-ink-mute md:flex">
+        <nav className="hidden gap-7 font-mono uppercase tracking-[0.18em] text-ink-mute md:flex">
           <a href="#manifesto" className="hover:text-ink transition">
             manifesto
           </a>
           <a href="#products" className="hover:text-ink transition">
             studio
           </a>
-          <a href="#beliefs" className="hover:text-ink transition">
-            ideas
+          <a href="#live" className="hover:text-ink transition">
+            live
+          </a>
+          <a href="#log" className="hover:text-ink transition">
+            log
+          </a>
+          <a href="#library" className="hover:text-ink transition">
+            library
+          </a>
+          <a href="#asks" className="hover:text-ink transition">
+            asks
           </a>
           <a href="#connect" className="hover:text-ink transition">
             connect
@@ -142,9 +181,16 @@ function Hero() {
         <Reveal delay={200}>
           <p className="mt-12 max-w-3xl text-xl leading-relaxed text-ink-soft md:text-2xl">
             <span className="font-serif italic">Contra.Ventures</span> is a
-            product studio of one, building tools that return agency to the
-            person holding them. Against extraction. Against resignation.
-            Against the quiet assumption that someone else will fix it.
+            product studio of one. Tools that return agency to the person
+            holding the device — not the platform behind it. Built in Bangalore
+            by Param Vaswani, with AI as the leverage and zero permission to
+            wait for.
+          </p>
+        </Reveal>
+        <Reveal delay={260}>
+          <p className="mt-6 max-w-2xl font-serif text-2xl italic leading-snug text-ink md:text-[28px]">
+            Bet on your body. Commit with your wallet. Think in reverse. Wire
+            yourself different. Take the power back.
           </p>
         </Reveal>
 
@@ -180,11 +226,40 @@ function Hero() {
           </div>
         </Reveal>
 
-        <div className="mt-24 flex items-end justify-between border-t border-rule pt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
-          <span>one person · twenty-plus builds · zero permission</span>
-          <a href="#manifesto" className="hover:text-ink transition">
-            scroll ↓
-          </a>
+        <div className="mt-24 grid gap-8 border-t border-rule pt-8 md:grid-cols-12">
+          <div className="md:col-span-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-mute">
+              this week
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-ink">
+              Shipping Keep oracle v2. Drafting first long-form on
+              oracle-as-moat.
+            </p>
+          </div>
+          <div className="md:col-span-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-mute">
+              recovery
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-ink">
+              Whoop says today is a write day. Listening to the data.
+            </p>
+          </div>
+          <div className="md:col-span-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-mute">
+              reading
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-ink">
+              Wendell Berry · Hannah Coulter. Patrick Collison threads.
+            </p>
+          </div>
+          <div className="md:col-span-3 md:text-right">
+            <a
+              href="#manifesto"
+              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute hover:text-ink transition"
+            >
+              scroll the studio ↓
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -200,54 +275,382 @@ function Manifesto() {
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
               the manifesto
             </div>
-            <h2 className="font-display mt-6 text-5xl leading-[0.95] tracking-[-0.02em] md:text-6xl">
+            <h2 className="font-display mt-6 text-5xl leading-[0.92] tracking-[-0.02em] md:text-7xl">
               <span className="font-serif italic">Contra</span>
               <br />
               means
               <br />
               <span className="font-serif italic text-accent">against.</span>
             </h2>
+            <p className="mt-8 max-w-xs font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+              against extraction · against resignation · against the quiet
+              assumption that someone else will fix it
+            </p>
           </Reveal>
         </div>
         <div className="md:col-span-8 md:pl-8">
           <Reveal delay={120}>
-            <p className="font-serif text-3xl leading-[1.25] tracking-tight text-ink md:text-4xl">
-              We are the last generation that remembers life before the
-              algorithm, and the first one that can rewrite it.
+            <p className="font-serif text-3xl leading-[1.2] tracking-tight text-ink md:text-[44px]">
+              {manifesto.lead}
             </p>
           </Reveal>
           <div className="mt-10 max-w-2xl space-y-6 text-lg leading-[1.65] text-ink-soft md:text-[19px]">
-            <Reveal delay={180}>
-              <p>
-                Big tech asked us to opt in. What we got were tools built for
-                their shareholders — every feed, every notification, every
-                default optimized for quarters we don&apos;t share in.
+            {manifesto.paragraphs.map((p, i) => (
+              <Reveal key={i} delay={180 + i * 60}>
+                <p>{p}</p>
+              </Reveal>
+            ))}
+            <Reveal delay={180 + manifesto.paragraphs.length * 60}>
+              <p className="font-serif italic text-2xl leading-snug text-ink md:text-3xl">
+                {manifesto.close}
               </p>
             </Reveal>
-            <Reveal delay={240}>
-              <p>
-                Opting out isn&apos;t the answer. We live here now. The
-                networks, the feeds, the AI — all of it is the world. We
-                don&apos;t escape it. We reclaim it.
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Pull({ index }: { index: number }) {
+  const p = pulls[index];
+  if (!p) return null;
+  return (
+    <section className="border-b border-rule bg-ink text-bg">
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <Reveal>
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+            ✺ &nbsp; pull quote
+          </div>
+          <p className="font-serif mt-8 text-[clamp(1.8rem,4.5vw,3.5rem)] leading-[1.1] tracking-tight italic">
+            &ldquo;{p.quote}&rdquo;
+          </p>
+          {p.cite && (
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-bg/55">
+              — {p.cite}
+            </p>
+          )}
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Origin() {
+  return (
+    <section id="origin" className="border-b border-rule">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                {origin.eyebrow}
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-[78px]">
+                I deleted the
+                <br />
+                <span className="font-serif italic">standard plan.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="mt-8 max-w-sm font-serif text-xl italic text-ink-soft md:text-2xl">
+                Bangalore, early 2026. Solo, no cofounder, no warm intro, no
+                incubator.
               </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-7 md:pt-4">
+            <div className="space-y-6 text-lg leading-[1.65] text-ink-soft md:text-[19px]">
+              {origin.body.map((p, i) => (
+                <Reveal key={i} delay={120 + i * 50}>
+                  <p>{p}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section id="process" className="border-b border-rule bg-bg-alt">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                {process.eyebrow}
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-6xl">
+                Zero
+                <br />
+                willpower
+                <br />
+                <span className="font-serif italic">on logistics.</span>
+              </h2>
+            </Reveal>
+          </div>
+          <div className="md:col-span-8 md:pt-4">
+            <div className="space-y-6 text-lg leading-[1.65] text-ink-soft md:text-[19px]">
+              {process.body.map((p, i) => (
+                <Reveal key={i} delay={120 + i * 50}>
+                  <p>{p}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Live() {
+  return (
+    <section
+      id="live"
+      className="relative overflow-hidden border-b border-rule bg-accent text-bg"
+    >
+      <div className="hero-grain absolute inset-0 opacity-[0.06] mix-blend-multiply pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <Reveal>
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-bg/70">
+            ✺ &nbsp; {liveCard.eyebrow}
+          </div>
+        </Reveal>
+        <div className="mt-8 grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-7">
+            <Reveal delay={80}>
+              <h2 className="font-display text-[clamp(2.6rem,8vw,6rem)] leading-[0.92] tracking-[-0.03em]">
+                Watch the studio
+                <br />
+                <span className="font-serif italic">in motion.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={160}>
+              <p className="mt-8 max-w-xl text-lg leading-[1.6] text-bg/85 md:text-xl">
+                {liveCard.body}
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-5 md:flex md:flex-col md:justify-end">
+            <Reveal delay={220}>
+              <div className="grid grid-cols-2 gap-px bg-bg/15">
+                <LiveTile
+                  label="recovery"
+                  value="73%"
+                  hint="whoop · this morning"
+                />
+                <LiveTile
+                  label="commits, 7d"
+                  value="122"
+                  hint="across 36+ repos"
+                />
+                <LiveTile label="sleep" value="7h 41m" hint="last night" />
+                <LiveTile label="ship" value="K-v2" hint="oracle next" />
+              </div>
             </Reveal>
             <Reveal delay={300}>
-              <p>
-                <span className="text-ink font-medium">
-                  Contra.Ventures is a studio for the reclamation.
-                </span>{" "}
-                Tools that return agency. Oracles over self-reports. Contracts
-                over willpower. Protocols that outlast any one platform. Built
-                by one person, with AI as leverage, in Bangalore, and shipped
-                before anyone was asked.
+              <Magnetic
+                href={liveCard.href}
+                external
+                className="group relative mt-10 inline-flex w-fit items-center gap-3 rounded-full border border-bg bg-bg px-7 py-4 font-mono text-[12px] uppercase tracking-[0.22em] text-ink hover:bg-ink hover:text-bg hover:border-ink transition-colors"
+                strength={0.25}
+              >
+                <span>{liveCard.cta}</span>
+                <span className="transition-transform group-hover:translate-x-1">
+                  ↗
+                </span>
+              </Magnetic>
+            </Reveal>
+          </div>
+        </div>
+
+        <div className="mt-20 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-bg/20 pt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-bg/65">
+          {liveCard.meta.map((m) => (
+            <span key={m}>{m}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LiveTile({
+  label,
+  value,
+  hint,
+}: {
+  label: string;
+  value: string;
+  hint: string;
+}) {
+  return (
+    <div className="bg-accent p-6 md:p-7">
+      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-bg/70">
+        {label}
+      </div>
+      <div className="mt-2 font-display text-3xl tracking-[-0.02em] text-bg md:text-4xl">
+        {value}
+      </div>
+      <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-bg/55">
+        {hint}
+      </div>
+    </div>
+  );
+}
+
+function BuildLog() {
+  const kindMap: Record<string, string> = {
+    ship: "shipped",
+    write: "wrote",
+    "open-source": "open-sourced",
+    eval: "evaluated",
+  };
+  return (
+    <section id="log" className="border-b border-rule">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                build log · last 14 days
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-7xl">
+                Receipts<span className="text-accent">.</span>
+              </h2>
+              <p className="mt-6 max-w-xs font-serif text-xl italic text-ink-soft md:text-2xl">
+                Dated, public, irreversible. Skip the pitch — read the diff.
               </p>
             </Reveal>
-            <Reveal delay={360}>
-              <p className="font-serif italic text-2xl text-ink">
-                Bet on your body. Commit with your wallet. Think in reverse.
-                Wire yourself different. Take the power back.
+          </div>
+          <div className="md:col-span-8">
+            <ul className="divide-y divide-rule border-y border-rule">
+              {buildLog.map((entry, i) => {
+                const Wrap: React.ElementType = entry.href ? "a" : "div";
+                const wrapProps = entry.href
+                  ? {
+                      href: entry.href,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    }
+                  : {};
+                return (
+                  <li key={i}>
+                    <Reveal delay={50 + i * 25}>
+                      <Wrap
+                        {...wrapProps}
+                        className="group grid gap-3 py-6 transition-colors hover:bg-bg-alt md:grid-cols-12 md:gap-6 md:py-7 md:px-2"
+                      >
+                        <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-mute md:col-span-2 md:pt-1.5">
+                          {formatLogDate(entry.date)}
+                        </div>
+                        <div className="md:col-span-2">
+                          <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                            <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+                            {kindMap[entry.kind]}
+                          </span>
+                        </div>
+                        <div className="md:col-span-7">
+                          <h3 className="font-display text-xl leading-tight tracking-tight md:text-2xl">
+                            {entry.what}
+                          </h3>
+                          <p className="mt-2 text-[15px] leading-[1.55] text-ink-soft">
+                            {entry.detail}
+                          </p>
+                        </div>
+                        <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute md:col-span-1 md:text-right md:pt-1.5">
+                          {entry.href ? (
+                            <span className="transition-transform group-hover:translate-x-0.5">
+                              ↗
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </Wrap>
+                    </Reveal>
+                  </li>
+                );
+              })}
+            </ul>
+            <Reveal delay={400}>
+              <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+                full history on{" "}
+                <a
+                  href="https://github.com/paramxclaudedev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-b border-ink-mute hover:text-accent hover:border-accent transition"
+                >
+                  github
+                </a>
+                . live state at{" "}
+                <a
+                  href="https://likehearted.life"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-b border-ink-mute hover:text-accent hover:border-accent transition"
+                >
+                  likehearted.life
+                </a>
+                .
               </p>
             </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function formatLogDate(s: string) {
+  const d = new Date(s);
+  return d
+    .toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    .toUpperCase();
+}
+
+function Currently() {
+  return (
+    <section id="currently" className="border-b border-rule">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+                living document · updated this week
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-7xl">
+                Currently
+                <span className="text-accent">.</span>
+              </h2>
+              <p className="mt-6 max-w-xs font-serif text-xl italic text-ink-soft md:text-2xl">
+                What&rsquo;s in my head right now. Nothing aspirational, all in
+                motion.
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-8">
+            <ul className="divide-y divide-rule border-y border-rule">
+              {currently.map((c, i) => (
+                <li key={c.label}>
+                  <Reveal delay={80 + i * 40}>
+                    <div className="grid gap-3 py-6 md:grid-cols-12 md:gap-8 md:py-7">
+                      <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent md:col-span-3 md:pt-1">
+                        {c.label}
+                      </div>
+                      <p className="text-lg leading-[1.55] text-ink md:col-span-9">
+                        {c.value}
+                      </p>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -265,7 +668,7 @@ function StatsStrip() {
             className={`px-6 py-10 ${i % 2 === 0 ? "border-r" : ""} md:border-r ${i >= stats.length - 1 ? "md:border-r-0" : ""} ${i < 4 ? "border-b md:border-b-0" : ""} border-rule`.trim()}
           >
             <div className="font-display text-4xl tracking-[-0.02em] md:text-5xl">
-              {s.value}
+              <CountUp value={s.value} />
             </div>
             <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-mute">
               {s.label}
@@ -393,7 +796,7 @@ function ProjectCard({ p }: { p: Project }) {
   return (
     <Wrap
       {...wrapProps}
-      className="group relative block h-full overflow-hidden p-7 md:p-9"
+      className="tilt group relative block h-full overflow-hidden p-7 md:p-9"
     >
       <div className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
       <div className="relative flex h-full flex-col justify-between gap-8 transition-colors duration-500 group-hover:text-bg">
@@ -439,6 +842,306 @@ function StatusChip({ s }: { s: Project["status"] }) {
       <span className={`inline-block h-1.5 w-1.5 rounded-full ${bg}`} />
       {label}
     </span>
+  );
+}
+
+function Cadence() {
+  const modeColor: Record<string, string> = {
+    ship: "bg-ink text-bg",
+    write: "bg-accent text-bg",
+    synth: "bg-bg-alt text-ink border border-rule",
+    rest: "bg-bg text-ink-soft border border-rule",
+    drift: "bg-bg text-ink-mute border border-rule border-dashed",
+  };
+  return (
+    <section id="cadence" className="border-b border-rule bg-bg-alt">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-28">
+        <div className="grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+                operating cadence
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-6xl">
+                The week,
+                <br />
+                <span className="font-serif italic">on rails.</span>
+              </h2>
+              <p className="mt-5 max-w-xs font-serif text-xl italic text-ink-soft md:text-2xl">
+                Modes by default. Whoop overrides them when the body says
+                otherwise.
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-8">
+            <ul className="grid grid-cols-7 gap-2">
+              {cadence.map((d, i) => (
+                <li key={d.day}>
+                  <Reveal delay={60 + i * 40}>
+                    <div className="flex h-full flex-col">
+                      <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+                        {d.day}
+                      </div>
+                      <div
+                        className={`mt-2 flex h-32 flex-col justify-between p-3 md:p-4 ${modeColor[d.mode]}`}
+                      >
+                        <div className="font-display text-lg tracking-tight md:text-xl">
+                          {d.mode}
+                        </div>
+                        <div className="font-mono text-[9px] uppercase tracking-[0.18em] opacity-75">
+                          {d.hint}
+                        </div>
+                      </div>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+            <Reveal delay={400}>
+              <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+                ship · write · synth · rest · drift — rotated weekly, audited
+                monthly
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Library() {
+  const kindMap: Record<string, string> = {
+    book: "book",
+    essay: "essay",
+    podcast: "pod",
+    paper: "paper",
+    newsletter: "newsletter",
+  };
+  return (
+    <section id="library" className="border-b border-rule">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                library · what shaped this
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-7xl">
+                Shelf
+                <br />
+                of
+                <br />
+                <span className="font-serif italic">influence.</span>
+              </h2>
+              <p className="mt-6 max-w-xs font-serif text-xl italic text-ink-soft md:text-2xl">
+                Books, essays, podcasts, papers. Curated, not recommended.
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-8">
+            <ul className="grid grid-cols-1 border-t border-l border-rule md:grid-cols-2">
+              {library.map((it, i) => (
+                <li key={it.title} className="border-b border-r border-rule">
+                  <Reveal delay={50 + i * 30}>
+                    <div className="group flex h-full flex-col gap-4 p-7 hover:bg-bg-alt transition-colors md:p-8">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                          {kindMap[it.kind]}
+                        </span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-mute">
+                          {it.author}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-2xl leading-tight tracking-tight md:text-[26px]">
+                        {it.title}
+                      </h3>
+                      <p className="text-[14px] leading-[1.6] text-ink-soft">
+                        {it.why}
+                      </p>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function InConversation() {
+  return (
+    <section id="conversations" className="border-b border-rule bg-bg-alt">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-mute">
+                in conversation with
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-[78px]">
+                Voices in
+                <br />
+                <span className="font-serif italic">the room.</span>
+              </h2>
+              <p className="mt-6 max-w-sm font-serif text-xl italic text-ink-soft md:text-2xl">
+                Some are people. Some are corpora. All of them get a chair at
+                the table.
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-7">
+            <ul className="divide-y divide-rule border-y border-rule">
+              {conversations.map((c, i) => {
+                const Wrap: React.ElementType = c.href ? "a" : "div";
+                const props = c.href
+                  ? {
+                      href: c.href,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    }
+                  : {};
+                return (
+                  <li key={c.name}>
+                    <Reveal delay={60 + i * 40}>
+                      <Wrap
+                        {...props}
+                        className="group block py-7 transition-colors md:py-8"
+                      >
+                        <div className="flex items-baseline justify-between gap-4">
+                          <h3 className="font-display text-2xl leading-tight tracking-tight md:text-3xl">
+                            {c.name}
+                          </h3>
+                          {c.href && (
+                            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-mute transition-transform group-hover:translate-x-1 group-hover:text-accent">
+                              ↗
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-3 max-w-2xl text-[15px] leading-[1.6] text-ink-soft md:text-base">
+                          {c.why}
+                        </p>
+                      </Wrap>
+                    </Reveal>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  return (
+    <section id="faq" className="border-b border-rule">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                things people ask
+              </div>
+              <h2 className="font-display mt-4 text-5xl leading-[0.95] tracking-[-0.025em] md:text-7xl">
+                Honest
+                <br />
+                <span className="font-serif italic">answers.</span>
+              </h2>
+              <p className="mt-6 max-w-xs font-serif text-xl italic text-ink-soft md:text-2xl">
+                The questions I get on every call. Saving you the email.
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-8">
+            <ul className="divide-y divide-rule border-y border-rule">
+              {faqs.map((f, i) => (
+                <li key={f.q}>
+                  <Reveal delay={60 + i * 40}>
+                    <details className="group py-7 md:py-8">
+                      <summary className="flex cursor-pointer list-none items-baseline justify-between gap-6">
+                        <h3 className="font-display text-xl leading-snug tracking-tight md:text-2xl">
+                          {f.q}
+                        </h3>
+                        <span className="font-mono text-[18px] text-ink-mute transition-transform group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-5 max-w-3xl text-[15px] leading-[1.65] text-ink-soft md:text-base">
+                        {f.a}
+                      </p>
+                    </details>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Asks() {
+  return (
+    <section
+      id="asks"
+      className="relative overflow-hidden border-b border-rule bg-ink text-bg"
+    >
+      <div className="hero-grain absolute inset-0 opacity-[0.05] pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-36">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <Reveal>
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                what i&rsquo;m looking for
+              </div>
+              <h2 className="font-display mt-4 text-[clamp(3rem,8vw,6.5rem)] leading-[0.92] tracking-[-0.03em]">
+                Specific
+                <br />
+                <span className="font-serif italic text-accent">asks.</span>
+              </h2>
+              <p className="mt-8 max-w-sm font-serif text-2xl italic text-bg/80">
+                Vague networking is a tax on everyone. Here&rsquo;s exactly who
+                I want to hear from.
+              </p>
+            </Reveal>
+          </div>
+          <div className="md:col-span-7">
+            <ul className="divide-y divide-bg/15 border-y border-bg/15">
+              {asks.map((a, i) => (
+                <li key={a.who}>
+                  <Reveal delay={80 + i * 50}>
+                    <div className="grid gap-3 py-7 md:grid-cols-12 md:gap-6 md:py-8">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent md:col-span-4 md:pt-1.5">
+                        {a.who}
+                      </div>
+                      <p className="text-[15px] leading-[1.6] text-bg/85 md:col-span-8 md:text-base">
+                        {a.what}
+                      </p>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+            <Reveal delay={400}>
+              <a
+                href="mailto:param@contra.ventures"
+                className="group mt-12 inline-flex items-center gap-3 rounded-full border border-bg bg-bg px-7 py-4 font-mono text-[12px] uppercase tracking-[0.22em] text-ink transition-colors hover:bg-accent hover:border-accent hover:text-bg"
+              >
+                <span>Write to param@contra.ventures</span>
+                <span className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
