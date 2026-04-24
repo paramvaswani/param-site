@@ -241,7 +241,8 @@ function Hero() {
               recovery
             </div>
             <p className="mt-2 text-sm leading-relaxed text-ink">
-              Whoop says today is a write day. Listening to the data.
+              Whoop 17% — deep red. Catching up on sleep tonight before the next
+              sprint.
             </p>
           </div>
           <div className="md:col-span-3">
@@ -441,16 +442,26 @@ function Live() {
               <div className="grid grid-cols-2 gap-px bg-bg/15">
                 <LiveTile
                   label="recovery"
-                  value="73%"
-                  hint="whoop · this morning"
+                  value="17%"
+                  hint="whoop · in the red"
                 />
                 <LiveTile
                   label="commits, 7d"
                   value="122"
                   hint="across 36+ repos"
                 />
-                <LiveTile label="sleep" value="7h 41m" hint="last night" />
-                <LiveTile label="ship" value="K-v2" hint="oracle next" />
+                <LiveTile label="sleep" value="3h 12m" hint="last night" />
+                <LiveTile label="next ship" value="K-v2" hint="oracle v2" />
+              </div>
+              <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-bg/55">
+                snapshot ·{" "}
+                {new Date().toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                })}{" "}
+                ist
               </div>
             </Reveal>
             <Reveal delay={300}>
@@ -874,7 +885,7 @@ function Cadence() {
             </Reveal>
           </div>
           <div className="md:col-span-8">
-            <ul className="grid grid-cols-7 gap-2">
+            <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-7">
               {cadence.map((d, i) => (
                 <li key={d.day}>
                   <Reveal delay={60 + i * 40}>

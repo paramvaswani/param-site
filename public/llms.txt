@@ -1,0 +1,44 @@
+# Contra.Ventures
+
+> A product studio of one operated by Param Vaswani in Bangalore. Tools that return agency to the person holding the device. Against extraction. Against resignation. Against the quiet assumption that someone else will fix it.
+
+## About
+
+Contra.Ventures is the holding shape for a portfolio of products, research, and infrastructure built by one solo founder in 2026. Every tool traces back to one stake: hand the user a lever they did not have before. If a product extracts attention without giving compounding agency, it is a platform. If it hands a lever, it is a tool. Param builds tools.
+
+The flagship is Keep — charity-forfeit commitment markets settled by Whoop and Oura biometrics. The thesis: oracles over self-reports, contracts over willpower, real markets with cryptographic settlement. Pre-seed, play-money live now, real-money license track in Gibraltar over the next 6–18 months.
+
+## Operator
+
+Param Vaswani — solo founder, Bangalore, India. Previously a corporate-track operator who deleted the standard plan when AI became a real leverage multiplier. ADHD-coded, contrarian taste, builds with Claude Code as the primary IDE. Reachable at param@contra.ventures.
+
+## Studio output
+
+- [Keep](https://keep-wine.vercel.app): the flagship — charity-forfeit commitment markets with biometric oracle settlement.
+- [BONP](https://biometric-oracle-protocol.vercel.app): the open Biometric Oracle Network Protocol underneath Keep.
+- [Param Hub](https://likehearted.life): the public Life OS dashboard — Whoop, training, content, tasks, in real time.
+- [Wired Different](https://wired-different.vercel.app): vibecoding for ADHD brains, course + community.
+- [Think Forward-Reverse](https://think-forward-reverse.vercel.app): decision-making by working backwards.
+- [Pickless](https://picklessai.vercel.app): consumer food-decision agent on Gemini 2.5.
+- [Build Yourself](https://build-yourself-v3.vercel.app): protocols, habits, and measurement — a private glow-up OS.
+- [Board of Directors](https://board-of-directors-app.vercel.app): an imaginary personal board, scheduled check-ins, AI voices.
+- [arxiv-digest](https://arxiv-digest-hazel.vercel.app): arxiv URL → tailored digest, cached prompts.
+- whoop-mcp, spaceship-mcp, vercel-mcp, claude-code-hooks-mcp: open-source MCP servers, all on GitHub at github.com/paramxclaudedev.
+- Six open evals: CMCHP cross-model handoff, MCP tool-selection, biometric-json, voice preservation, Claude Code hook savings, yt-tldr.
+
+## Beliefs
+
+- Biometric sovereignty: the body generates more data than any platform; oracles should settle, not self-reports.
+- Solo is a structural advantage: with AI as leverage, one person holds what used to take a team.
+- Commitment beats motivation: willpower is weather; contracts with wallet, body, and friends are climate.
+- Tools, not platforms: platforms extract attention; tools return agency.
+- Ship before permission: the internet rewards builders who were already shipping when the moment arrived.
+- ADHD is a spec, not a bug: tools designed for neurotypical focus exclude the people who could use them best.
+
+## Reach
+
+- Email: param@contra.ventures
+- Live state: https://likehearted.life
+- GitHub: https://github.com/paramxclaudedev
+- LinkedIn: https://linkedin.com/in/paramvaswani
+- Newsletter: https://paramvaswani.substack.com

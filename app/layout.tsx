@@ -32,6 +32,66 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://contra.ventures/#org",
+      name: "Contra.Ventures",
+      alternateName: "contra.ventures",
+      url: "https://contra.ventures",
+      description:
+        "A product studio of one. Tools that return agency to the person holding the device. Operated by Param Vaswani in Bangalore.",
+      foundingDate: "2026",
+      foundingLocation: {
+        "@type": "Place",
+        name: "Bangalore, India",
+      },
+      founder: { "@id": "https://contra.ventures/#person" },
+      sameAs: [
+        "https://github.com/paramxclaudedev",
+        "https://linkedin.com/in/paramvaswani",
+        "https://paramvaswani.substack.com",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": "https://contra.ventures/#person",
+      name: "Param Vaswani",
+      jobTitle: "Founder",
+      worksFor: { "@id": "https://contra.ventures/#org" },
+      url: "https://contra.ventures",
+      sameAs: [
+        "https://github.com/paramxclaudedev",
+        "https://linkedin.com/in/paramvaswani",
+        "https://paramvaswani.substack.com",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bangalore",
+        addressCountry: "IN",
+      },
+      knowsAbout: [
+        "Prediction markets",
+        "Biometric oracles",
+        "AI agents",
+        "MCP servers",
+        "Solo founding",
+        "Claude Code",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://contra.ventures/#site",
+      url: "https://contra.ventures",
+      name: "Contra.Ventures",
+      publisher: { "@id": "https://contra.ventures/#org" },
+      inLanguage: "en-US",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -43,6 +103,10 @@ export default function RootLayout({
       className={`${serif.variable} ${mono.variable} antialiased`}
     >
       <body className="min-h-screen bg-bg text-ink selection:bg-accent/20">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>

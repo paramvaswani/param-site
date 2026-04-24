@@ -279,7 +279,7 @@ export const currently: Currently[] = [
   {
     label: "Building",
     value:
-      "Keep oracle v2, biometric-json eval going public, Anthropic Fellows app.",
+      "Keep oracle v2. biometric-json eval going public. YC application for May 4.",
   },
   {
     label: "Writing",
@@ -293,7 +293,7 @@ export const currently: Currently[] = [
   },
   {
     label: "Recovering from",
-    value: "Whoop 31% yesterday. Today is a write day.",
+    value: "Whoop 17%. HRV 29ms. Sleeping more is the only honest answer.",
   },
   {
     label: "Listening to",
@@ -315,6 +315,14 @@ export type LogEntry = {
 };
 
 export const buildLog: LogEntry[] = [
+  {
+    date: "2026-04-25",
+    what: "contra.ventures · v2 polish pass",
+    detail:
+      "OG image, llms.txt, JSON-LD, sitemap, mobile fixes, real Whoop snapshot wired into the Live block. Twenty-plus sections, two themes.",
+    href: "https://contra.ventures",
+    kind: "ship",
+  },
   {
     date: "2026-04-25",
     what: "contra.ventures launched",
@@ -511,8 +519,8 @@ export const conversations: Conversation[] = [
     href: "https://forum.beeminder.com",
   },
   {
-    name: "Anthropic Fellows cohort",
-    why: "Currently applying. The conversations there — when they happen — will shape what comes after Keep.",
+    name: "YC + a16z + AI Grant founders",
+    why: "Applying May 4. The bar there sets the bar for Keep — every rejection sharpens the pitch, every yes opens a different door.",
   },
   {
     name: "Solo-founder Slack circles",
@@ -547,8 +555,8 @@ export const asks: Ask[] = [
     what: "The essay pipeline is real and shipping. If you commission contrarian-tech writing, the door is open.",
   },
   {
-    who: "Anthropic Fellows / frontier labs",
-    what: "I want the application to land. If you're inside, a 15-minute call would mean a lot.",
+    who: "YC / a16z / AI Grant alumni",
+    what: "Applications going in over the next two weeks. If you've been through the process and have ten minutes for sharper feedback on the pitch, I'll send the deck.",
   },
 ];
 
