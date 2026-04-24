@@ -84,9 +84,9 @@ export default function Home() {
 
 function TopBar() {
   return (
-    <header className="sticky top-0 z-40 border-b border-rule bg-bg/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 text-[12px]">
-        <a href="#top" className="font-mono tracking-tight">
+    <header className="sticky top-0 z-40 border-b border-rule bg-bg/80 backdrop-blur-md overflow-hidden">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 text-[12px] md:px-6">
+        <a href="#top" className="font-mono tracking-tight shrink-0">
           <span className="text-ink">contra</span>
           <span className="text-accent">.</span>
           <span className="text-ink-soft">ventures</span>
@@ -116,7 +116,7 @@ function TopBar() {
         </nav>
         <a
           href="mailto:param@contra.ventures"
-          className="group inline-flex items-center gap-2 rounded-full border border-ink px-4 py-1.5 font-mono uppercase tracking-[0.18em] hover:bg-ink hover:text-bg transition-all"
+          className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-ink px-4 py-1.5 font-mono uppercase tracking-[0.18em] hover:bg-ink hover:text-bg transition-all"
         >
           say hi
           <span className="transition-transform group-hover:translate-x-0.5">

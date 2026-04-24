@@ -11,7 +11,7 @@ export function CountUp({
 }) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const [display, setDisplay] = useState(value);
-  const [animated, setAnimated] = useState(false);
+  const animatedRef = useRef(false);
 
   const match = value.match(/^(\d+)([+\sa-zA-Z]*)$/);
   const numeric = match ? parseInt(match[1], 10) : null;
@@ -19,14 +19,14 @@ export function CountUp({
 
   useEffect(() => {
     if (numeric === null) return;
-    setDisplay("0" + suffix);
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting && !animated) {
-            setAnimated(true);
+          if (e.isIntersecting && !animatedRef.current) {
+            animatedRef.current = true;
+            setDisplay("0" + suffix);
             const start = performance.now();
             function tick(now: number) {
               const t = Math.min(1, (now - start) / duration);
@@ -44,7 +44,7 @@ export function CountUp({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [numeric, suffix, duration, animated]);
+  }, [numeric, suffix, duration]);
 
   if (numeric === null) return <span>{value}</span>;
   return <span ref={ref}>{display}</span>;
